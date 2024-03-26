@@ -104,10 +104,10 @@ int main(int argc, char* argv[])
             std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(infile), {});
             infile.close();
             
-            DWORD nig = scanIdaStyle("0F 84 ? ? ? ? F3 0F 10 0D",reinterpret_cast<unsigned char*>(&buffer[0]), buffer.size());
-            patchBuffer(nig, "0F 85");
-            nig = scanIdaStyle("89 81 ? ? ? ? 33 C0 5D C2 08 00 CC CC CC CC CC CC CC CC CC CC CC 55 8B EC 83 EC 34", reinterpret_cast<unsigned char*>(&buffer[0]), buffer.size());
-            patchBuffer(nig, "90 90 90 90 90 90");
+            DWORD patt = scanIdaStyle("0F 84 ? ? ? ? F3 0F 10 0D",reinterpret_cast<unsigned char*>(&buffer[0]), buffer.size());
+            patchBuffer(patt, "0F 85");
+            patt = scanIdaStyle("89 81 ? ? ? ? 33 C0 5D C2 08 00 CC CC CC CC CC CC CC CC CC CC CC 55 8B EC 83 EC 34", reinterpret_cast<unsigned char*>(&buffer[0]), buffer.size());
+            patchBuffer(patt, "90 90 90 90 90 90");
 
 
             std::ofstream outfile;
@@ -117,7 +117,7 @@ int main(int argc, char* argv[])
 
         }
         else {
-            std::cout << "lol retard";
+            std::cout << "incorrect use";
 
         }
 
